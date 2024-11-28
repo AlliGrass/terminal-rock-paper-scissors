@@ -1,24 +1,32 @@
 # Welcome to my Terminal Emulator. 
 
 Currently it can only run a few commands, (run, help, clear) with only one program attached to the application, however it is versatile enough to be able to apply more commands quite easily.
+- The application runs like a terminal and has one program implemented into the terminal. By running the following command the game Rock Paper Scissors will start in the terminal.
+          
+      `run RPS`
+
 
 ## Installation
 The application requires a few dependencies to run. Namely React.ts for the frontend, Flask for the backend and Flask CORS to be able to run the Java files.
 
-Before attempting to run any servers you’ll need to compile the java file using `javac RockPaperScissors.java`
+Before attempting to run any servers you’ll need to compile the java file using     
+
+    `javac RockPaperScissors.java`
 
 Then run both the backend and frontend servers 
-`python3 server.py`
-`npm run dev`
+
+    `python3 server.py`
+    `npm run dev`
 
 Open the browser page for the frontend server. If running development then the port should be `localhost/5173`
 
-## Adding output to terminal
+## Updating Pre-existing code
+### Adding output to terminal
 Any output that needs to be placed into the terminal should be done using the `inputHistory` state. The state holds all current history of outputs. 
 
 `setInputHistory((prev) => [...prev, 'New Output'])`
 
-## Adding to pre existing functions
+### Adding to pre existing functions
 Currently the only function you can expand is the `handleRunCommands`. This function has a switch case to handle separate functions. Simply add another case with your intended logic. 
 - If the function you want to implement requires the terminal to enter a different mode that isn’t “default” and can't interact with any of the default commands you can alter the `currentHandlingMethod` state.
 
@@ -44,9 +52,7 @@ const handleRunCommand = (args: string[]) => {
   }
 ```
 
-
-
-## Adding commands
+### Adding commands
 Any new commands that aren’t run of help should be implemented into the switch case in `keysDownDefault`. Then write a new function to implement the logic of the code.
 
 ```ts
@@ -71,7 +77,7 @@ const keyDownDefault = (commandWord: string, args: string[]) => {
   }
 ```
 
-## Requesting from backend
+### Requesting from backend
 Create a fetch request to the python server using the route. This fetch request should return the output of the functions that are being utilised.
 
 ```ts
@@ -82,7 +88,7 @@ fetch(`http://localhost:5000/api/route`)
   })
 ```
 
-## Running external programs
+### Running external programs
 Utilise pythons `subprocess` to run different programs from different files. All console logs from the program will be stored in the python call and can be distributed back to the frontend.
 
 ```py
