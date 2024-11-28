@@ -12,7 +12,7 @@ CORS(app)
 def play_rps(player_hand):
     valid_moves = ["Rock", "Paper", "Scissors"]
     if player_hand.capitalize() not in valid_moves:
-        return jsonify({"error": "Invalid move. Please choose Rock, Paper, or Scissors."}), 400
+        return jsonify({"error": "Invalid move. Please choose Rock, Paper, or Scissors."})
 
     try:
         result = subprocess.run(
@@ -28,13 +28,13 @@ def play_rps(player_hand):
             "result": output_lines[2],
             "playAgain": output_lines[3]
         }
-        return jsonify(response), 200
+        return jsonify(response)
     except FileNotFoundError:
-        return jsonify({"error": "Java program not found. Ensure it's compiled and in the correct directory."}), 500
+        return jsonify({"error": "Java program not found. Ensure it's compiled and in the correct directory."})
     except subprocess.CalledProcessError as e:
-        return jsonify({"error": f"Java program error: {e.stderr.strip()}"}), 500
+        return jsonify({"error": f"Java program error: {e.stderr.strip()}"})
     except Exception as e:
-        return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
+        return jsonify({"error": f"Unexpected error: {str(e)}"})
 
 if __name__ == '__main__':
     app.run(debug=True)
