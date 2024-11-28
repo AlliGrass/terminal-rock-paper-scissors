@@ -37,6 +37,9 @@ const App: React.FC = () => {
         console.log('Available commands: run, help')
         setInputHistory((prev) => [...prev, `Available commands: run RPS, help`])
         break;
+      case 'clear':
+        setInputHistory([])
+        break;
       default:
         console.log(currentHandlingMethod)
         console.log(`Unknown command: ${commandWord}`)
